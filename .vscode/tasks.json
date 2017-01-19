@@ -1,0 +1,123 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "0.1.0",
+  "command": "npm",
+  "isShellCommand": true,
+  "showOutput": "always",
+  "suppressTaskName": true,
+  "tasks": [
+    {
+      "taskName": "install",
+      "args": [
+        "install"
+      ]
+    },
+    {
+      "taskName": "update",
+      "args": [
+        "update"
+      ]
+    },
+    {
+      "taskName": "clean",
+      "args": [
+        "run",
+        "-s",
+        "clean"
+      ]
+    },
+    {
+      "taskName": "test",
+      "args": [
+        "run",
+        "-s",
+        "test"
+      ]
+    },
+    {
+      "taskName": "test:spec",
+      "args": [
+        "run",
+        "-s",
+        "test:spec"
+      ]
+    },
+    {
+      "taskName": "test:unit",
+      "args": [
+        "run",
+        "-s",
+        "test:unit"
+      ],
+      "isTestCommand": true
+    },
+    {
+      "taskName": "test:unit:coverage",
+      "args": [
+        "run",
+        "-s",
+        "test:unit"
+      ]
+    },
+    {
+      "taskName": "lint:src",
+      "args": [
+        "run",
+        "-s",
+        "lint:src"
+      ],
+      "problemMatcher": {
+            "owner": "tslint",
+            "fileLocation": [
+              "relative",
+              "${workspaceRoot}"
+            ],
+            "severity": "warning",
+            "pattern": {
+                "regexp": "^(\\S.*)\\[(\\d+), (\\d+)\\]:\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "message": 4
+            }
+        }
+    },
+    {
+      "taskName": "build",
+      "args": [
+        "run",
+        "-s",
+        "build"
+      ],
+      "problemMatcher": "$tsc"
+    },
+    {
+      "taskName": "build:src",
+      "args": [
+        "run",
+        "-s",
+        "build:src"
+      ],
+      "isBuildCommand": true,
+      "problemMatcher": "$tsc"
+    },
+    {
+      "taskName": "build:ts:spec:features",
+      "args": [
+        "run",
+        "-s",
+        "build:ts:spec:features"
+      ],
+      "problemMatcher": "$tsc"
+    },
+    {
+      "taskName": "release",
+      "args": [
+        "run",
+        "-s",
+        "release"
+      ]
+    }
+  ]
+}

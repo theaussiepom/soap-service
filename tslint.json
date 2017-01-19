@@ -1,0 +1,24 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "indent": [true, "spaces"],
+    "whitespace": [true,
+      "check-branch",
+      "check-operator",
+      "check-separator",
+      "check-decl",
+      "check-module",
+      "check-type"
+    ],
+    "no-default-export": true,
+    "no-constructor-vars": false,
+    "interface-name": [true, "never-prefix"],
+    "variable-name": [true, "ban-keywords", "check-format"],
+    "function-name": true,
+    "no-function-expression": true,
+    "only-arrow-functions": [ false ]
+  },
+  "rulesDirectory": [
+    "node_modules/tslint-microsoft-contrib"
+  ]
+}

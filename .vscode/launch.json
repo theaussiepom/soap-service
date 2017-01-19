@@ -1,0 +1,75 @@
+{
+  // Use IntelliSense to learn about possible Node.js debug attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "args": [],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "name": "DEBUG",
+      "outFiles": [
+        "${workspaceRoot}/{dist,node_modules}/**/*.js"
+      ],
+      "program": "${workspaceRoot}/dist/main.js",
+      "request": "launch",
+      "runtimeArgs": [
+        "--nolazy"
+      ],
+      "runtimeExecutable": null,
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "type": "node"
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Process",
+      "port": 5858,
+      "outFiles": [],
+      "sourceMaps": true
+    },
+    {
+      "args": [
+        "--opts",
+        "mocha.opts"
+      ],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "NODE_ENV": "testing"
+      },
+      "name": "Unit tests",
+      "outFiles": [
+        "${workspaceRoot}/{dist,node_modules}/**/*.js"
+      ],
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "type": "node"
+    },
+    {
+      "args": [
+        "spec/features"
+      ],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "NODE_ENV": "testing"
+      },
+      "name": "Feature specs",
+      "outFiles": [
+        "${workspaceRoot}/{dist,node_modules}/**/*.js",
+        "${workspaceRoot}/spec/features/**/*.js"
+      ],
+      "preLaunchTask": "build:ts:spec:features",
+      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber.js",
+      "request": "launch",
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "type": "node"
+    }
+  ]
+}

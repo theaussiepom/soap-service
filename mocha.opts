@@ -1,0 +1,4 @@
+--require source-map-support/register
+--reporter dot
+--watch-extensions js
+dist/**/*.test.js

@@ -1,0 +1,86 @@
+{
+  "author": "David Sole <david.sole@minfos.com.au>",
+  "bin": {},
+  "bugs": {
+    "url": "https://bitbucket.org/minfos/ref-boilerplate-core/issues"
+  },
+  "config": {},
+  "dependencies": {},
+  "description": "Core boilerplate template",
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/chance": "^0.7.31",
+    "@types/cucumber": "0.0.35",
+    "@types/mocha": "^2.2.33",
+    "@types/node": "^6.0.46",
+    "@types/sinon": "^1.16.32",
+    "chai": "^3.5.0",
+    "chance": "^1.0.4",
+    "cross-env": "^3.1.3",
+    "cucumber": "^2.0.0-rc.6",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^3.2.0",
+    "npm-run-all": "^3.1.2",
+    "rimraf": "latest",
+    "sinon": "^1.17.6",
+    "source-map-support": "^0.4.6",
+    "ts-node": "^1.3.0",
+    "tslib": "^1.2.0",
+    "tslint": "^3.15.1",
+    "tslint-microsoft-contrib": "^2.0.13",
+    "typemoq": "^1.0.2",
+    "typescript": "^2.1.1",
+    "typescript-formatter": "^4.0.0",
+    "watch": "latest"
+  },
+  "directories": {
+    "doc": "doc"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://bitbucket.org/minfos/ref-boilerplate-core#readme",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "name": "ref-boilerplate-core",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/minfos/ref-boilerplate-core.git"
+  },
+  "scripts": {
+    "build:ts:spec:features": "tsc -p spec/features",
+    "build:ts:src": "tsc -p src",
+    "build:src": "npm-run-all -p build:*:**:src",
+    "build:spec": "npm-run-all -p build:*:spec:**",
+    "build": "npm-run-all -s build:src build:spec",
+    "clean": "rimraf dist coverage spec/**/*.js spec/**/*.js.map",
+    "deploy": "echo \"Error: deploy script not defined\" && exit 1",
+    "format:ts:spec:features": "tsfmt -r --baseDir spec/features",
+    "format:ts:src": "tsfmt -r --baseDir src",
+    "format": "npm-run-all -p format:**",
+    "lint:ts:spec:features": "tslint --type-check -c tslint.json spec/features/**/*.ts",
+    "lint:ts:src": "tslint --type-check -c tslint.json src/**/*.ts",
+    "lint:src": "npm-run-all lint:*:**:src",
+    "lint": "npm-run-all -p lint:*:**",
+    "predeploy": "npm run test",
+    "release": "cross-env NODE_ENV=production npm-run-all clean build test",
+    "test:unit": "mocha --opts mocha.opts",
+    "test:unit:coverage": "istanbul cover --include-all-sources --report html --dir coverage/unit node_modules/mocha/bin/_mocha -- --opts mocha.opts",
+    "test:unit:coverage:noreport": "istanbul cover --include-all-sources --report none --dir coverage/unit node_modules/mocha/bin/_mocha -- --opts mocha.opts",
+    "test:unit:coverage:check": "istanbul check-coverage --root coverage/unit",
+    "test:spec:features": "node -r source-map-support/register node_modules/cucumber/bin/cucumber.js spec/features",
+    "test:spec:features:coverage": "istanbul cover --include-all-sources --report html --dir coverage/spec/features node_modules/cucumber/bin/cucumber.js spec/features",
+    "test:spec:features:coverage:noreport": "istanbul cover --include-all-sources --report none --dir coverage/spec/features node_modules/cucumber/bin/cucumber.js spec/features",
+    "test:spec:features:coverage:check": "istanbul check-coverage --root coverage/spec/features",
+    "test:spec": "npm-run-all -p test:spec:*",
+    "test": "npm-run-all -p lint:*:** test:**:coverage:noreport -s **:check",
+    "watch:build": "watch \"npm-run-all build:**:src\" src",
+    "watch": "npm-run-all -p watch:**"
+  },
+  "typings": "./dist/index.d.ts",
+  "version": "1.0.0"
+}

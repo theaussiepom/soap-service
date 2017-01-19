@@ -1,0 +1,23 @@
+{
+	"recommendations": [
+    "EditorConfig.EditorConfig",
+    "Shan.code-settings-sync",
+    "Tyriar.sort-lines",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "cspotcode.vscode-mocha-latte",
+    "donjayamanne.githistory",
+    "eg2.tslint",
+    "fknop.vscode-npm",
+    "formulahendry.auto-rename-tag",
+    "joelday.docthis",
+    "ms-vscode.js-atom-grammar",
+    "msjsdiag.debugger-for-chrome",
+    "nwallace.peep",
+    "rbbit.typescript-hero",
+    "richie5um2.vscode-sort-json",
+    "steve8708.Align",
+    "stevejpurves.cucumber",
+    "xabikos.JavaScriptSnippets"
+	]
+}

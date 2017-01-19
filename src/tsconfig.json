@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "jsx": "preserve",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "../dist",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "stripInternal": true,
+    "target": "ES6",
+    "typeRoots": [
+      "../node_modules/@types",
+      "../vendor/definitions"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

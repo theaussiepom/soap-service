@@ -77,7 +77,7 @@
     "test:spec:features:coverage:noreport": "istanbul cover --include-all-sources --report none --dir coverage/spec/features node_modules/cucumber/bin/cucumber.js spec/features",
     "test:spec:features:coverage:check": "istanbul check-coverage --root coverage/spec/features",
     "test:spec": "npm-run-all -p test:spec:*",
-    "test": "npm-run-all -p lint:*:** test:**:coverage:noreport -s **:check",
+    "test": "npm-run-all -p lint:*:** test:**:coverage:noreport -s test:unit:coverage:check",
     "watch:build": "watch \"npm-run-all build:**:src\" src",
     "watch": "npm-run-all -p watch:**"
   },

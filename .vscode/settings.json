@@ -16,10 +16,10 @@
   "mocha.env": {
     "__TEST__": true
   },
-  "mocha.options": {
-  },
+  "mocha.options": {},
   "tslint.enable": true,
   "tslint.ignoreDefinitionFiles": false,
+  "tslint.exclude": "**/node_modules/**/*.ts",
   "search.exclude": {
     "node_modules": true,
     "dist/**": true,

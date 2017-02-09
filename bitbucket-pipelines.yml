@@ -20,6 +20,7 @@ pipelines:
           - npm run release
           - "git log -1 --pretty=\\\"%B\\\" | perl -ne 'if(m/chore\\(release\\): ([0-9.]+)/){ print $1; }' > PUBLISH_VERSION"
           - "if [ -s PUBLISH_VERSION ]; then cat PUBLISH_VERSION; npm publish; fi"
+          - npm access grant read-only minfos:read-only
   default:
     - step:
         script:

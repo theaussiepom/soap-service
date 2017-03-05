@@ -1,20 +1,18 @@
-image: node:boron
+image: minfos/tesla-ci:stable
 
 pipelines:
   branches:
     master:
       - step:
           script:
-          - export NPM_CONFIG_LOGLEVEL=warn
-          - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\nregistry=https://registry.npmjs.org\\n" > ~/.npmrc
+          - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
           - npm version
           - npm install --no-progress
           - npm run release
     release/*:
       - step:
           script:
-          - export NPM_CONFIG_LOGLEVEL=warn
-          - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\nregistry=https://registry.npmjs.org\\n" > ~/.npmrc
+          - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
           - npm version
           - npm install --no-progress
           - npm run release
@@ -24,8 +22,7 @@ pipelines:
   default:
     - step:
         script:
-        - export NPM_CONFIG_LOGLEVEL=warn
-        - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\nregistry=https://registry.npmjs.org\\n" > ~/.npmrc
+        - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
         - npm version
         - npm install --no-progress
         - npm run build
@@ -39,5 +36,7 @@ pipelines:
             - git checkout master
             - git merge --no-ff --no-commit $BITBUCKET_COMMIT
             - if [[ -n $(git ls-files -u) ]]; then exit 1; fi
+            - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
+            - npm version
             - npm -s --no-progress install
             - npm -s release

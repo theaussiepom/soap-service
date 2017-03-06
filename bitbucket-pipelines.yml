@@ -5,38 +5,23 @@ pipelines:
     master:
       - step:
           script:
-          - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
-          - npm version
-          - npm install --no-progress
-          - npm run release
+          - source build/ci/init.sh
+          - source build/ci/release.sh
     release/*:
       - step:
           script:
-          - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
-          - npm version
-          - npm install --no-progress
-          - npm run release
-          - "git log -1 --pretty=\\\"%B\\\" | perl -ne 'if(m/chore\\(release\\): ([0-9.]+)/){ print $1; }' > PUBLISH_VERSION"
-          - "if [ -s PUBLISH_VERSION ]; then cat PUBLISH_VERSION; npm publish; fi"
-          - npm access grant read-only minfos:read-only
+          - source build/ci/init.sh
+          - source build/ci/release.sh
+          - source build/ci/publish.sh
   default:
     - step:
         script:
-        - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
-        - npm version
-        - npm install --no-progress
-        - npm run build
-        - npm run test:unit:coverage
+          - source build/ci/init.sh
+          - source build/ci/work-in-progress.sh
   custom:
     "Pre-check a merge into the master branch":
       - step:
           script:
-            - git config --global user.name "Bitbucket Pipelines"
-            - git config --global user.email "user@example.org"
-            - git checkout master
-            - git merge --no-ff --no-commit $BITBUCKET_COMMIT
-            - if [[ -n $(git ls-files -u) ]]; then exit 1; fi
-            - printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\\n" > ~/.npmrc
-            - npm version
-            - npm -s --no-progress install
-            - npm -s release
+            - source build/ci/merge-check.sh
+            - source build/ci/init.sh
+            - source build/ci/release.sh

@@ -9,7 +9,7 @@ defineSupportCode((step: StepDefinitions) => {
     console.log("When");
   });
 
-  step.When("outcome", () => {
+  step.Then("outcome", () => {
     console.log("When");
   });
 });

@@ -1,5 +1,6 @@
 {
 	"recommendations": [
+    "AravindKumar.gherkin-indent",
     "EditorConfig.EditorConfig",
     "Shan.code-settings-sync",
     "Tyriar.sort-lines",

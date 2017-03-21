@@ -4,7 +4,9 @@ check:
     branches: 100
     functions: 100
     lines: 100
-
+reporting:
+    reports:
+        - html
 instrumentation:
   root: dist
   extensions:

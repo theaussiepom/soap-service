@@ -7,17 +7,20 @@ pipelines:
           script:
           - source build/ci/init.sh
           - source build/ci/release.sh
+          - source build/ci/done.sh
     release/*:
       - step:
           script:
           - source build/ci/init.sh
           - source build/ci/release.sh
           - source build/ci/publish.sh
+          - source build/ci/done.sh
   default:
     - step:
         script:
           - source build/ci/init.sh
           - source build/ci/work-in-progress.sh
+          - source build/ci/done.sh
   custom:
     "Pre-check a merge into the master branch":
       - step:
@@ -25,3 +28,4 @@ pipelines:
             - source build/ci/merge-check.sh
             - source build/ci/init.sh
             - source build/ci/release.sh
+            - source build/ci/done.sh

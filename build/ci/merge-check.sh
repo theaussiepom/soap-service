@@ -1,4 +1,5 @@
 #!/bin/bash -e
+set -x
 
 # Ensure that git has a configured user
 if [ -z $(git config --global user.name) ]; then
@@ -10,3 +11,5 @@ fi
 git checkout master
 git merge --no-ff --no-commit $BITBUCKET_COMMIT
 if [[ -n $(git ls-files -u) ]]; then exit 1; fi
+
+set +x

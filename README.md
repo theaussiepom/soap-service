@@ -69,6 +69,21 @@ the command:
 npm install
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Configuration
+-------------
+
+The primary mechanism for runtime configuration is to use predetermined
+environment variables. These can be set in operating system prior to execution,
+or injected at runtime using the commands
+[cross-env](https://www.npmjs.com/package/cross-env) and/or
+[env-cmd](https://www.npmjs.com/package/env-cmd).
+
+### Configurable variables
+
+| **Name**   | **Default** | **Description**           |
+|------------|-------------|---------------------------|
+| SAMPLE_VAR | sample      | This is a sample variable |
+
 Further documentation
 ---------------------
 

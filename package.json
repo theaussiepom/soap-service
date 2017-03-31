@@ -5,7 +5,9 @@
     "url": "https://bitbucket.org/minfos/ref-boilerplate-core/issues"
   },
   "config": {},
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.6.0"
+  },
   "description": "Core boilerplate template",
   "devDependencies": {
     "@types/chai": "^3.4.34",
@@ -27,7 +29,6 @@
     "rimraf": "latest",
     "sinon": "^1.17.6",
     "source-map-support": "^0.4.6",
-    "tslib": "^1.2.0",
     "tslint": "^3.15.1",
     "tslint-microsoft-contrib": "^2.0.13",
     "typemoq": "^1.0.2",

@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import { StepDefinitions, defineSupportCode} from "cucumber";
+import { defineSupportCode, StepDefinitions} from "cucumber";
 
 defineSupportCode((step: StepDefinitions) => {
   step.Given("context", () => {

@@ -11,7 +11,7 @@
       "check-type"
     ],
     "no-default-export": true,
-    "no-constructor-vars": false,
+    "no-parameter-properties": true,
     "interface-name": [true, "never-prefix"],
     "variable-name": [true, "ban-keywords", "check-format"],
     "function-name": true,

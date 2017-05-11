@@ -28,6 +28,8 @@
     "coverage/**": true
   },
   "npm-intellisense.scanDevDependencies": true,
+  "typescript.format.enable": true,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "typescript.tsdk": "./node_modules/typescript/lib",
   "typescriptHero.resolver.pathStringDelimiter": "\"",
   "typescriptHero.restartDebugger.active": false

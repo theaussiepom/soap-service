@@ -37,9 +37,6 @@ This repository is the base reference template for a standard package
 
 -   `/.gitignore` - Filename patterns for Git to ignore
 
--   `/.istanbul.yml` - Configuration for the
-    [Istanbul](https://github.com/gotwarlost/istanbul) code coverage system
-
 -   `/bitbucket-pipelines.yml` - Configuration for [BitBucket
     pipelines](https://bitbucket.org/product/features/pipelines) CI
 

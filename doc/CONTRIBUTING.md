@@ -21,7 +21,7 @@ A coverage rating of 100% for all of the statement, branches, functions and
 lines metrics is expected and enforced before any contribution will be accepted.
 
 These metrics are measured by the
-[Istanbul](https://github.com/gotwarlost/istanbul) code coverage system.
+[Istanbul](https://istanbul.js.org/) code coverage system.
 
 Commits
 -------

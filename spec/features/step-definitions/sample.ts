@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import { defineSupportCode, StepDefinitions} from "cucumber";
+import { defineSupportCode, StepDefinitions } from "cucumber";
 
 defineSupportCode((step: StepDefinitions) => {
   step.Given("context", () => {
@@ -10,6 +10,6 @@ defineSupportCode((step: StepDefinitions) => {
   });
 
   step.Then("outcome", () => {
-    console.log("When");
+    console.log("Then");
   });
 });

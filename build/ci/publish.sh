@@ -15,7 +15,7 @@ if [ -n "$RELEASE_VERSION" ]; then
 
   # Publish to NPM
   echo "Publishing: $PUBLISH_VERSION"
-  npm publish
+  npm run publish
   npm access grant read-only minfos:read-only
 
 fi

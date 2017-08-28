@@ -8,7 +8,8 @@
     "spec/**/*.js": true,
     "spec/**/*.js.map": true,
     "node_modules": true,
-    "coverage": true
+    "coverage": true,
+    "temp": true
   },
   "jscs.enable": false,
   "jshint.enable": false,
@@ -25,7 +26,8 @@
     "dist/**": true,
     "spec/**/*.js": true,
     "spec/**/*.js.map": true,
-    "coverage/**": true
+    "coverage/**": true,
+    "temp": true
   },
   "npm-intellisense.scanDevDependencies": true,
   "typescript.format.enable": true,

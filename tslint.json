@@ -12,6 +12,10 @@
     ],
     "no-default-export": true,
     "no-parameter-properties": true,
+    "no-submodule-imports": [
+      true,
+      "@minfos"
+    ],
     "interface-name": [true, "never-prefix"],
     "variable-name": [true, "ban-keywords", "check-format"],
     "function-name": true

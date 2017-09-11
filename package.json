@@ -61,7 +61,8 @@
     "functions": 100,
     "lines": 100,
     "include": [
-      "dist/**/*.js"
+      "dist/**/*.js",
+      "src/**/*.ts"
     ],
     "reporter": [
       "html",

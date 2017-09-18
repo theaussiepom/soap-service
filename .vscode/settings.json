@@ -9,7 +9,11 @@
     "spec/**/*.js.map": true,
     "node_modules": true,
     "coverage": true,
-    "temp": true
+    "temp": true,
+    "*.tgz": true,
+    ".serverless": true,
+    ".webpack": true,
+    ".nyc_output": true
   },
   "jscs.enable": false,
   "jshint.enable": false,
@@ -27,7 +31,11 @@
     "spec/**/*.js": true,
     "spec/**/*.js.map": true,
     "coverage/**": true,
-    "temp": true
+    "temp": true,
+    "*.tgz": true,
+    ".serverless": true,
+    ".webpack": true,
+    ".nyc_output": true
   },
   "npm-intellisense.scanDevDependencies": true,
   "typescript.format.enable": true,

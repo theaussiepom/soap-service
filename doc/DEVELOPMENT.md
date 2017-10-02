@@ -141,3 +141,55 @@ The standard process is to run:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 npm run deploy {parameters}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using a development build of a package
+--------------------------------------
+
+### Building a development build
+
+A semver prerelease package with the prerelease tag 'dev' is published to NPM
+for each work-in-progress build by the CI system. The published packages are
+tagged with a sanitised copy of the name of the branch from which they were
+created. To confirm the name, look in the Pipeline output at the end of the
+work-in-progress script for a build for the line:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Published dev package with tag: feature-mon-123-a-branch-name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The work-in-progress builds are considered those that are not in the master or
+release/\* branches - such as features and bug fixes.
+
+These prerelease versions can be installed by specifying their tag as the semver
+constraint. Unfortunately, when you install with the `npm` command it saves the
+version, not the tag, in the package.json file. To get around this, manually
+update the package.json file after installation.
+
+To do this, perform the following:
+
+1) Install the package using the tag name. For example. installing `my-package`
+from its branch `feature/mon-123-a-branch-name` :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm install --save @minfos/my-package@feature-mon-123-a-branch-name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2) Then update the dependency from a specific version to a tag name:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  "dependencies": {
+    "@minfos/my-package": "^1.0.3-dev.57"
+  }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+changes to
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  "dependencies": {
+    "@minfos/my-package": "feature-mon-123-a-branch-name"
+  }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The prerelease version is the pipelines build number. By using the tag name as
+the constraint, newer builds in that branch will be available when you update
+your dependencies using `npm upgrade`.

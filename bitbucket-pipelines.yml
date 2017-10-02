@@ -4,12 +4,16 @@ pipelines:
   branches:
     master:
       - step:
+          caches:
+          - node
           script:
           - source build/ci/init.sh
           - source build/ci/release.sh
           - source build/ci/done.sh
     release/*:
       - step:
+          caches:
+          - node
           script:
           - source build/ci/init.sh
           - source build/ci/release.sh
@@ -17,6 +21,8 @@ pipelines:
           - source build/ci/done.sh
   default:
     - step:
+        caches:
+          - node
         script:
           - source build/ci/init.sh
           - source build/ci/work-in-progress.sh
@@ -24,6 +30,8 @@ pipelines:
   custom:
     "Pre-check a merge into the master branch":
       - step:
+          caches:
+            - node
           script:
             - source build/ci/merge-check.sh
             - source build/ci/init.sh

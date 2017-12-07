@@ -18,7 +18,8 @@
     ],
     "interface-name": [true, "never-prefix"],
     "variable-name": [true, "ban-keywords", "check-format"],
-    "function-name": true
+    "function-name": true,
+    "no-implicit-dependencies": [ true, "dev" ]
   },
   "rulesDirectory": [
     "node_modules/tslint-microsoft-contrib"

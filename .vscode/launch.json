@@ -25,6 +25,26 @@
       "type": "node"
     },
     {
+      "args": [],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "name": "DEBUG (current file)",
+      "outFiles": [
+        "${workspaceRoot}/{dist,node_modules}/**/*.js"
+      ],
+      "program": "${file}",
+      "request": "launch",
+      "runtimeArgs": [
+        "--nolazy"
+      ],
+      "runtimeExecutable": null,
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "type": "node"
+    },
+    {
       "type": "node",
       "request": "attach",
       "name": "Attach to Process",
@@ -64,7 +84,6 @@
         "${workspaceRoot}/{dist,node_modules}/**/*.js",
         "${workspaceRoot}/spec/features/**/*.js"
       ],
-      "preLaunchTask": "build:ts:spec:features",
       "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber.js",
       "request": "launch",
       "sourceMaps": true,

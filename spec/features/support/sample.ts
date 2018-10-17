@@ -1,8 +1,6 @@
 // tslint:disable:no-console
-import { defineSupportCode, Hooks } from "cucumber";
+import { Before } from "cucumber";
 
-defineSupportCode((hooks: Hooks) => {
-  hooks.Before(() => {
-    console.log("Before");
-  });
+Before(() => {
+  // Do nothing
 });

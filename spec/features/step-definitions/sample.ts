@@ -1,15 +1,14 @@
 // tslint:disable:no-console
-import { defineSupportCode, StepDefinitions } from "cucumber";
+import { Given, Then, When } from "cucumber";
 
-defineSupportCode((step: StepDefinitions) => {
-  step.Given("context", () => {
-    console.log("Given");
-  });
-  step.When("event", () => {
-    console.log("When");
-  });
+Given("context", () => {
+  // Do nothing
+});
 
-  step.Then("outcome", () => {
-    console.log("Then");
-  });
+When("event", () => {
+  // Do nothing
+});
+
+Then("outcome", () => {
+  // Do nothing
 });

@@ -84,11 +84,34 @@
         "${workspaceRoot}/{dist,node_modules}/**/*.js",
         "${workspaceRoot}/spec/features/**/*.js"
       ],
-      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber.js",
+      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
       "request": "launch",
       "sourceMaps": true,
       "stopOnEntry": false,
-      "type": "node"
+      "type": "node",
+      "outputCapture": "std"
+    },
+    {
+      "args": [
+        "spec/features",
+        "--tags",
+        "@debug"
+      ],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "NODE_ENV": "testing"
+      },
+      "name": "Feature specs (@debug)",
+      "outFiles": [
+        "${workspaceRoot}/{dist,node_modules}/**/*.js",
+        "${workspaceRoot}/spec/features/**/*.js"
+      ],
+      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
+      "request": "launch",
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "type": "node",
+      "outputCapture": "std"
     }
   ]
 }

@@ -1,9 +1,16 @@
 import { assert } from "chai";
-import { example } from "./example";
+import { spy } from "sinon";
+import { example, exampleWithCallback } from "./example";
 
 describe("An example test", () => {
   it("example says 'hi'", () => {
     const actual = example();
     assert.equal(actual, "hi");
+  });
+
+  it("exampleWithCallback calls callback", () => {
+    const exampleSpy = spy();
+    exampleWithCallback(exampleSpy);
+    assert.isTrue(exampleSpy.called);
   });
 });

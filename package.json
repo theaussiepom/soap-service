@@ -45,7 +45,8 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/**/*.ts"
   ],
   "homepage": "https://bitbucket.org/minfos/ref-boilerplate-core#readme",
   "license": "UNLICENSED",
@@ -95,8 +96,8 @@
     "lint:ts:src": "tslint -c tslint.json -p src/tsconfig.json",
     "lint:src": "npm-run-all lint:*:**:src",
     "lint": "npm-run-all -p lint:*",
-    "package": "rimraf temp/package && node build/pre-pack.js temp/package && npm pack temp/package",
-    "publish": "rimraf temp/package && node build/pre-pack.js temp/package && npm publish temp/package",
+    "package": "npm pack",
+    "publish": "npm publish",
     "predeploy": "npm run test",
     "release": "cross-env NODE_ENV=production npm-run-all clean build test",
     "test:coverage": "npm-run-all -s test:coverage:collect test:coverage:report test:coverage:check",

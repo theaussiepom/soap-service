@@ -11,14 +11,12 @@
   "description": "Core boilerplate template",
   "devDependencies": {
     "@types/chai": "^4.1.6",
-    "@types/chance": "^0.7.31",
     "@types/cucumber": "^4.0.4",
     "@types/mocha": "^5.2.5",
     "@types/mockery": "^1.4.29",
     "@types/node": "^8",
     "@types/sinon": "^5.0.5",
     "chai": "^4.2.0",
-    "chance": "^1.0.4",
     "copyfiles": "^1.2.0",
     "cross-env": "^4.0.0",
     "cucumber": "^5.0.2",
@@ -33,7 +31,6 @@
     "source-map-support": "^0.4.6",
     "tslint": "^5.2.0",
     "tslint-microsoft-contrib": "^5.0.1",
-    "typemoq": "^1.0.2",
     "typescript": "^2.4.1",
     "typescript-formatter": "^5.1.0",
     "watch": "latest"

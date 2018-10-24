@@ -1,6 +1,5 @@
 {
 	"recommendations": [
-    "AravindKumar.gherkin-indent",
     "EditorConfig.EditorConfig",
     "Shan.code-settings-sync",
     "Tyriar.sort-lines",
@@ -18,7 +17,7 @@
     "rbbit.typescript-hero",
     "richie5um2.vscode-sort-json",
     "steve8708.Align",
-    "stevejpurves.cucumber",
+    "alexkrechik.cucumberautocomplete",
     "xabikos.JavaScriptSnippets"
 	]
 }

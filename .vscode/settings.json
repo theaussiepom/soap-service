@@ -15,8 +15,6 @@
     ".webpack": true,
     ".nyc_output": true
   },
-  "jscs.enable": false,
-  "jshint.enable": false,
   "mocha.files.glob": "dist/**/*.test.js",
   "mocha.env": {
     "__TEST__": true
@@ -42,5 +40,11 @@
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "typescript.tsdk": "./node_modules/typescript/lib",
   "typescriptHero.resolver.pathStringDelimiter": "\"",
-  "typescriptHero.restartDebugger.active": false
+  "typescriptHero.restartDebugger.active": false,
+  "cucumberautocomplete.steps": [
+      "spec/features/step-definitions/*.ts",
+      "node_modules/@minfos/**/automation/step-definitions.js"
+  ],
+  "cucumberautocomplete.syncfeatures": "spec/features/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": true
 }

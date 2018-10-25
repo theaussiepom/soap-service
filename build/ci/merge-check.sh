@@ -9,6 +9,13 @@ fi
 
 # Merge the source branch into master and verify there are no merge-conflicts
 git checkout master
+
+if [ $? != 0 ]; then
+  git remote set-branches --add origin master
+  git fetch origin master
+  git checkout master
+fi
+
 git merge --no-ff --no-commit $BITBUCKET_COMMIT
 if [[ -n $(git ls-files -u) ]]; then exit 1; fi
 

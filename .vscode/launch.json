@@ -54,6 +54,7 @@
     },
     {
       "args": [
+        "--no-timeouts",
         "--opts",
         "mocha.opts"
       ],

@@ -23,6 +23,7 @@
     "__TEST__": true
   },
   "mocha.options": {},
+  "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "tslint.autoFixOnSave": true,
   "tslint.enable": true,
   "tslint.ignoreDefinitionFiles": false,

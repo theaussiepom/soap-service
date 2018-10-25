@@ -5,18 +5,20 @@
     "importHelpers": true,
     "jsx": "preserve",
     "module": "commonjs",
-    "noImplicitAny": true,
     "outDir": "../dist",
     "sourceMap": true,
-    "strictNullChecks": true,
+    "strict": true,
     "stripInternal": true,
     "target": "es2017",
-    "lib": ["es2017"],
+    "lib": [
+      "es2017"
+    ],
     "typeRoots": [
       "../node_modules/@types",
       "../vendor/definitions"
     ]
   },
+  "exclude": [],
   "include": [
     "**/*.ts",
     "**/*.tsx"

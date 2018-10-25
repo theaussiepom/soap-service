@@ -1,8 +1,12 @@
 {
   "extends": "tslint:latest",
   "rules": {
-    "indent": [true, "spaces"],
-    "whitespace": [true,
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "whitespace": [
+      true,
       "check-branch",
       "check-operator",
       "check-separator",
@@ -16,10 +20,20 @@
       true,
       "@minfos"
     ],
-    "interface-name": [true, "never-prefix"],
-    "variable-name": [true, "ban-keywords", "check-format"],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format"
+    ],
     "function-name": true,
-    "no-implicit-dependencies": [ true, "dev" ]
+    "no-implicit-dependencies": [
+      true,
+      "dev"
+    ]
   },
   "rulesDirectory": [
     "node_modules/tslint-microsoft-contrib"

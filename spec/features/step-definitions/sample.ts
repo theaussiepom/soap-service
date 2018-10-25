@@ -1,4 +1,3 @@
-// tslint:disable:no-console
 import { Given, Then, When } from "cucumber";
 
 Given("context", () => {

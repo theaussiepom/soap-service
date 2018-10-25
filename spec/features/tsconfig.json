@@ -1,18 +1,14 @@
 {
+  "extends": "../../src/tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "jsx": "preserve",
-    "module": "commonjs",
-    "sourceMap": true,
-    "target": "es2017",
-    "lib": ["es2017"],
+    "outDir": ".",
     "typeRoots": [
       "../../node_modules/@types",
       "../../vendor/definitions"
     ]
   },
+  "exclude": [],
   "include": [
     "**/*.ts"
   ]

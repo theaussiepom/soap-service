@@ -3,6 +3,7 @@
   "editor.rulers": [
     120
   ],
+
   "files.exclude": {
     "dist": true,
     "spec/**/*.js": true,
@@ -15,6 +16,7 @@
     ".webpack": true,
     ".nyc_output": true
   },
+  "javascript.preferences.quoteStyle": "double",
   "mocha.files.glob": "dist/**/*.test.js",
   "mocha.env": {
     "__TEST__": true
@@ -36,6 +38,8 @@
     ".nyc_output": true
   },
   "npm-intellisense.scanDevDependencies": true,
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.suggest.completeFunctionCalls": true,
   "typescript.format.enable": true,
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "typescript.tsdk": "./node_modules/typescript/lib",

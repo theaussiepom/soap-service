@@ -1,6 +1,6 @@
 import { setDefaultTimeout } from "cucumber";
 
-declare var v8debug;
+declare var v8debug: unknown;
 const isDebugging = typeof v8debug === "object"
   || process.execArgv.findIndex((arg) => /--debug|--inspect/.test(arg)) >= 0;
 

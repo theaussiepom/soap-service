@@ -12,6 +12,7 @@
     "coverage": true,
     "temp": true,
     "*.tgz": true,
+    "**/.npmignore": true,
     ".serverless": true,
     ".webpack": true,
     ".nyc_output": true

@@ -1,5 +1,9 @@
 image: minfos/tesla-ci-v8:stable
 
+definitions:
+  caches:
+    node8: node_modules
+
 pipelines:
   branches:
     master:

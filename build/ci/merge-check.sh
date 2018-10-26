@@ -11,8 +11,10 @@ fi
 # Merge the source branch into master
 if ! git checkout master; then
 
-  $REPOSITORY_OAUTH_ACCESS_TOKEN=`node build/ci/get-access-token.js`
+  set +x
+  REPOSITORY_OAUTH_ACCESS_TOKEN=`node build/ci/get-access-token.js`
   git remote set-url origin https://x-token-auth:$REPOSITORY_OAUTH_ACCESS_TOKEN@bitbucket.org/minfos/ref-boilerplate-core.git
+  set -x
 
   git remote set-branches --add origin master
   git fetch origin master

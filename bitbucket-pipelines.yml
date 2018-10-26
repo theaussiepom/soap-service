@@ -1,11 +1,11 @@
-image: minfos/tesla-ci:stable
+image: minfos/tesla-ci-v8:stable
 
 pipelines:
   branches:
     master:
       - step:
           caches:
-          - node
+          - node8
           script:
           - source build/ci/init.sh
           - source build/ci/release.sh
@@ -13,7 +13,7 @@ pipelines:
     release/*:
       - step:
           caches:
-          - node
+          - node8
           script:
           - source build/ci/init.sh
           - source build/ci/release.sh
@@ -22,7 +22,7 @@ pipelines:
   default:
     - step:
         caches:
-          - node
+          - node8
         script:
           - source build/ci/init.sh
           - source build/ci/work-in-progress.sh
@@ -31,7 +31,7 @@ pipelines:
     "Pre-check a merge into the master branch":
       - step:
           caches:
-            - node
+            - node8
           script:
             - source build/ci/merge-check.sh
             - source build/ci/init.sh

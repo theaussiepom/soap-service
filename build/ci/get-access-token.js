@@ -7,16 +7,16 @@ var post_data = querystring.stringify({
   refresh_token: (process.argv[3] || process.env.BITBUCKET_REFRESH_TOKEN)
 });
 
-const options = {
-  ...parse("https://bitbucket.org/site/oauth2/access_token"),
-  headers: {
-    "Accept": "*/*",
-    "Authorization": "Basic " + (process.argv[2] || process.env.BITBUCKET_AUTHORIZATION),
-    "Content-Type": "application/x-www-form-urlencoded",
-    'Content-Length': Buffer.byteLength(post_data)
-  },
-  method: "POST",
+const options = parse("https://bitbucket.org/site/oauth2/access_token");
+
+options.headers = {
+  "Accept": "*/*",
+  "Authorization": "Basic " + (process.argv[2] || process.env.BITBUCKET_AUTHORIZATION),
+  "Content-Type": "application/x-www-form-urlencoded",
+  'Content-Length': Buffer.byteLength(post_data)
 };
+
+options.method = "POST";
 
 const req = request(options, (res) => {
   let body = "";

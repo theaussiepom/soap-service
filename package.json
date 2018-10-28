@@ -73,7 +73,6 @@
     "cache": false,
     "all": true
   },
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://bitbucket.org/minfos/ref-boilerplate-core.git"
@@ -115,5 +114,5 @@
     "watch": "npm-run-all -p watch:**"
   },
   "typings": "./dist/index.d.ts",
-  "version": "1.1.1"
+  "version": "2.0.0"
 }

@@ -33,8 +33,7 @@
     "no-implicit-dependencies": [
       true,
       "dev"
-    ],
-    "no-unsafe-any": true
+    ]
   },
   "rulesDirectory": [
     "node_modules/tslint-microsoft-contrib"

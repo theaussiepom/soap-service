@@ -5,7 +5,7 @@ import { example, exampleWithCallback } from "./example";
 describe("An example test", () => {
   it("example says 'hi'", () => {
     const actual = example();
-    assert.equal(actual, "him");
+    assert.equal(actual, "hi");
   });
 
   it("exampleWithCallback calls callback", () => {

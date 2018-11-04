@@ -92,8 +92,6 @@
     "lint:ts:src": "tslint -c tslint.json -p src/tsconfig.json",
     "lint:src": "npm-run-all lint:*:**:src",
     "lint": "npm-run-all lint:*",
-    "package": "npm pack",
-    "publish": "npm publish",
     "predeploy": "npm run test",
     "release": "cross-env NODE_ENV=production npm-run-all clean build test",
     "test:coverage": "npm-run-all test:coverage:collect test:coverage:report test:coverage:check",

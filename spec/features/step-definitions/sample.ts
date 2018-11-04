@@ -1,3 +1,4 @@
+import { assert } from "chai";
 import { Given, Then, When } from "cucumber";
 
 Given("context", () => {
@@ -10,4 +11,6 @@ When("event", () => {
 
 Then("outcome", () => {
   // Do nothing
+  const sut = false;
+  assert.isTrue(sut);
 });

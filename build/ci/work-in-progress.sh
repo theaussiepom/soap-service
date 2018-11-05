@@ -3,7 +3,7 @@ set -x
 
 npm run build
 mkdir test-results
-npm install cucumber-junit mocha-junit-reporter
+npm install cucumber-junit mocha-junit-reporter cucumber-junit-convert
 
 npm run test:unit:coverage -- --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/unit.xml
 

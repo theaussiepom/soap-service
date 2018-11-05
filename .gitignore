@@ -4,6 +4,7 @@ temp/
 dist/
 **/*.map
 **/*.js
+test-results/
 
 # OS generated files #
 ######################

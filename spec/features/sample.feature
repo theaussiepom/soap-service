@@ -1,9 +1,9 @@
-Feature: title
+Feature: The sample
   In order to value
   As a role
   I want feature
 
-  Scenario: title
+  Scenario: Passes the tests
     Given context
     When event
     Then outcome

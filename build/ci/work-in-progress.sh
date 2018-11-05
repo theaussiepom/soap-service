@@ -2,8 +2,17 @@
 set -x
 
 npm run build
-npm run test:unit:coverage
-npm run test:spec:features:coverage -- --tags 'not @wip'
+mkdir test-results
+npm install mocha-junit-reporter cucumber-junit-convert
+
+npm run test:unit:coverage -- --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/unit.xml
+
+set +e
+npm run test:spec:features:coverage -- --tags 'not @wip' --format progress --format json:test-results/spec-features.json
+WIP_SPECS_PASS=$?
+set -e
+node build/ci/generate-spec-features-test-results.js
+if [[ $WIP_SPECS_PASS != 0 ]]; then exit $WIP_SPECS_PASS; fi
 
 PKG_VERSION=`node -p "require('./package.json').version"`
 VERSION=`node_modules/.bin/semver $PKG_VERSION -i prerelease --preid dev | sed "s/[0-9]\+$/$BITBUCKET_BUILD_NUMBER/"`

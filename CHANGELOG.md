@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+## [2.1.0](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.0.0...v2.1.0) (2018-11-09)
+
+### Features
+
+* Remove no-unsafe-any due to development overhead
+* Add jUnit-compatible reporting to tests so that CI can report test failures
+
 <a name="2.0.0"></a>
 ## [2.0.0](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v1.1.1...v2.0.0) (2018-10-29)
 

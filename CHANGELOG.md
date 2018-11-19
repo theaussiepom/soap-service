@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.1.0...v2.1.1) (2018-11-19)
+
+
+### Bug Fixes
+
+* Only tag the WIP package if a branch name is available ([ca8636e](https://bitbucket.org/minfos/ref-boilerplate-core/commits/ca8636e))
+* Update publish CI script to use native NPM publish command rather than publish script ([6c84435](https://bitbucket.org/minfos/ref-boilerplate-core/commits/6c84435))
+
+
+
 <a name="2.1.0"></a>
 ## [2.1.0](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.0.0...v2.1.0) (2018-11-09)
 

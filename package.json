@@ -112,5 +112,5 @@
     "watch": "npm-run-all -p watch:**"
   },
   "typings": "./dist/index.d.ts",
-  "version": "2.1.0"
+  "version": "2.1.1"
 }

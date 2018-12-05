@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.2"></a>
+## [2.1.2](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.1.1...v2.1.2) (2018-12-05)
+
+
+### Bug Fixes
+
+* Fix bad dependency of event-stream included via npm-run-all ([17faad5](https://bitbucket.org/minfos/ref-boilerplate-core/commits/17faad5))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.1.0...v2.1.1) (2018-11-19)
 

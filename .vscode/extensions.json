@@ -1,5 +1,5 @@
 {
-	"recommendations": [
+  "recommendations": [
     "EditorConfig.EditorConfig",
     "Shan.code-settings-sync",
     "Tyriar.sort-lines",
@@ -16,8 +16,7 @@
     "nwallace.peep",
     "rbbit.typescript-hero",
     "richie5um2.vscode-sort-json",
-    "steve8708.Align",
     "alexkrechik.cucumberautocomplete",
     "xabikos.JavaScriptSnippets"
-	]
+  ]
 }

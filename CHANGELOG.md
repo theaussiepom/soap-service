@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.3](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.1.2...v2.1.3) (2019-06-04)
+
+
+### Bug Fixes
+
+* **build:** update package dependencies ([012cf33](https://bitbucket.org/minfos/ref-boilerplate-core/commits/012cf33))
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://bitbucket.org/minfos/ref-boilerplate-core/compare/v2.1.1...v2.1.2) (2018-12-05)
 

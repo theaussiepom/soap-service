@@ -1,24 +1,25 @@
 import { AfterAll, Before, World } from "cucumber";
-import * as http from "http";
+import { createServer } from "http";
 import { Server } from "net";
-import * as soap from "soap";
+import { listen } from "soap";
 import { ConnectionConfig } from "../index";
 
 interface ServerConfig {
-  ResetService: () => void;
-  ServiceDefinition: any;
-  ServiceUrlPath: string;
-  Wsdl: string;
-  WsdlUrlPath: string;
+  resetService: () => void;
+  serviceDefinition: any;
+  serviceUrlPath: string;
+  wsdl: string;
+  wsdlUrlPath: string;
 }
 
 interface ServerStatus {
-  Config: ConnectionConfig;
-  IsAvailable: boolean;
+  config: ConnectionConfig;
+  isAvailable: boolean;
 }
 
 let server: Server | undefined;
-let url: string;
+let serviceUrl: string;
+let wsdlUrl: string;
 let password: string;
 let user: string;
 let port: number;
@@ -26,14 +27,15 @@ let serverConfig: ServerConfig;
 let suspended = true;
 
 export const getServerStatus = (): ServerStatus => ({
-  Config: {
+  config: {
     credentials: password ? {
       password,
       user,
     } : undefined,
-    serviceUrl: url,
+    serviceUrl,
+    wsdlUrl,
   },
-  IsAvailable: !suspended,
+  isAvailable: !suspended,
 });
 
 export function configureServer(config: ServerConfig) {
@@ -52,14 +54,15 @@ export function configureServer(config: ServerConfig) {
 }
 
 function start(config: ServerConfig) {
-  server = http.createServer((req, res) => {
+  wsdlUrl = `${config.wsdlUrlPath}?wsdl`;
+  server = createServer((req, res) => {
     const wsdlUrls = [
-      `${config.WsdlUrlPath}?wsdl`,
-      `${config.WsdlUrlPath}?singlewsdl`,
+      wsdlUrl,
+      `${config.wsdlUrlPath}?singlewsdl`,
     ];
 
     if (wsdlUrls.findIndex((s) => s === req.url!.toLowerCase()) >= 0) {
-      res.write(config.Wsdl.replace(/(?<=soap\d*:address location=".*:)\d{3,}(?=\/)/g, `${server!.address().port}`));
+      res.write(config.wsdl.replace(/(?<=soap\d*:address location=".*:)\d{3,}(?=\/)/g, `${server!.address().port}`));
       res.end();
     } else {
       res.end("404: Not Found: " + req.url);
@@ -70,7 +73,7 @@ function start(config: ServerConfig) {
 
   server.on("listening", () => {
     port = server!.address().port;
-    url = `http://localhost:${port}`;
+    serviceUrl = `http://localhost:${port}`;
   });
 
   server.on("connection", (socket) => {
@@ -87,11 +90,11 @@ function start(config: ServerConfig) {
     });
   });
 
-  soap.listen(
+  listen(
     server,
-    config.ServiceUrlPath,
-    config.ServiceDefinition,
-    config.Wsdl);
+    config.serviceUrlPath,
+    config.serviceDefinition,
+    config.wsdl);
 }
 
 function stop() {
@@ -118,6 +121,6 @@ function resumeService(): void {
 }
 
 function reset() {
-  serverConfig.ResetService();
+  serverConfig.resetService();
   resumeService();
 }

@@ -6,6 +6,7 @@ export interface ConnectionConfig {
     user: string;
   };
   serviceUrl: string;
+  wsdlUrl: string;
 }
 
 export type SoapMethod<TInput, TResult> = (
@@ -53,7 +54,7 @@ export async function execute<TService extends Client, TInput, TResult>(
 function getServiceClient<TService extends Client>(config: ConnectionConfig)
   : Promise<TService> {
   return new Promise<TService>((resolve, reject) => {
-    createClient(`${config.serviceUrl}?WSDL`, {}, (err, c) => {
+    createClient(`${config.wsdlUrl}`, {}, (err, c) => {
       /* istanbul ignore next */
       if (err) {
         reject(err);

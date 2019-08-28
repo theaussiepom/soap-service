@@ -2,4 +2,4 @@
 // Do not put code in this file !
 // Export anything that should be public
 
-export { example } from "./subfolder/example";
+export { execute, SoapMethod } from "./service";

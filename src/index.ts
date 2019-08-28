@@ -2,4 +2,4 @@
 // Do not put code in this file !
 // Export anything that should be public
 
-export { execute, SoapMethod } from "./service";
+export { ConnectionConfig, execute, SoapMethod } from "./service";

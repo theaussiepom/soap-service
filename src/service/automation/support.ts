@@ -1,8 +1,13 @@
-import { AfterAll, Before, World } from "cucumber";
+import { AfterAll, Before } from "cucumber";
 import { createServer } from "http";
 import { Server } from "net";
 import { listen } from "soap";
 import { ConnectionConfig } from "../index";
+
+export interface MockServerStatus {
+  config: ConnectionConfig;
+  isAvailable: boolean;
+}
 
 interface ServerConfig {
   resetService: () => void;
@@ -12,115 +17,117 @@ interface ServerConfig {
   wsdlUrlPath: string;
 }
 
-interface ServerStatus {
-  config: ConnectionConfig;
-  isAvailable: boolean;
-}
+export class MockServer {
+  private server: Server | undefined;
+  private serviceUrl: string = "";
+  private wsdlUrl: string = "";
+  private password: string = "";
+  private user: string = "";
+  private port: number = 0;
+  private serverConfig: ServerConfig;
+  private suspended = true;
 
-let server: Server | undefined;
-let serviceUrl: string;
-let wsdlUrl: string;
-let password: string;
-let user: string;
-let port: number;
-let serverConfig: ServerConfig;
-let suspended = true;
+  constructor(serverConfig: ServerConfig) {
+    this.serverConfig = serverConfig;
+  }
 
-export const getServerStatus = (): ServerStatus => ({
-  config: {
-    credentials: password ? {
-      password,
-      user,
-    } : undefined,
-    serviceUrl,
-    wsdlUrl,
-  },
-  isAvailable: !suspended,
-});
+  public getStatus(): MockServerStatus {
+    return {
+      config: {
+        credentials: this.password ? {
+          password: this.password,
+          user: this.user,
+        } : undefined,
+        serviceUrl: this.serviceUrl,
+        wsdlUrl: this.wsdlUrl,
+      },
+      isAvailable: !this.suspended,
+    };
+  }
 
-export function configureServer(config: ServerConfig) {
-  serverConfig = config;
+  public initialise() {
+    AfterAll(() => {
+      this.stop();
+    });
 
-  AfterAll(() => {
-    stop();
-  });
+    Before(() => {
+      if (typeof (this.server) === "undefined") {
+        this.startServer();
+      }
+      this.reset();
+    });
+  }
 
-  Before(function(this: World) {
-    if (typeof (server) === "undefined") {
-      start(config);
-    }
-    reset();
-  });
-}
+  public startServer() {
+    this.wsdlUrl = `${this.serverConfig.wsdlUrlPath}?wsdl`;
+    this.server = createServer((req, res) => {
+      const wsdlUrls = [
+        this.wsdlUrl,
+        `${this.serverConfig.wsdlUrlPath}?singlewsdl`,
+      ];
 
-function start(config: ServerConfig) {
-  wsdlUrl = `${config.wsdlUrlPath}?wsdl`;
-  server = createServer((req, res) => {
-    const wsdlUrls = [
-      wsdlUrl,
-      `${config.wsdlUrlPath}?singlewsdl`,
-    ];
-
-    if (wsdlUrls.findIndex((s) => s === req.url!.toLowerCase()) >= 0) {
-      res.write(config.wsdl.replace(/(?<=soap\d*:address location=".*:)\d{3,}(?=\/)/g, `${server!.address().port}`));
-      res.end();
-    } else {
-      res.end("404: Not Found: " + req.url);
-    }
-  });
-
-  server.listen(port || 0);
-
-  server.on("listening", () => {
-    port = server!.address().port;
-    serviceUrl = `http://localhost:${port}`;
-  });
-
-  server.on("connection", (socket) => {
-    socket.on("data", (data) => {
-      const message = data.toString();
-      if (message.substr(0, 4) === "POST") {
-        const credentialsMatch = message.match(/(?<=Authorization: Basic ).*\b/);
-        if (credentialsMatch && credentialsMatch.length) {
-          const credentials = new Buffer(credentialsMatch![0], "base64").toString();
-          user = credentials.match(/^.*(?=:.*$)/)![0];
-          password = credentials.match(/(?<=^.*:).*$/)![0];
-        }
+      if (wsdlUrls.findIndex((s) => s === req.url!.toLowerCase()) >= 0) {
+        res.write(this.serverConfig.wsdl.replace(
+          /(?<=soap\d*:address location=".*:)\d{3,}(?=\/)/g, `${this.server!.address().port}`));
+        res.end();
+      } else {
+        res.end("404: Not Found: " + req.url);
       }
     });
-  });
 
-  listen(
-    server,
-    config.serviceUrlPath,
-    config.serviceDefinition,
-    config.wsdl);
-}
+    this.server.listen(this.port || 0);
 
-function stop() {
-  if (typeof (server) !== "undefined") {
-    server.close();
-    server = undefined;
+    this.server.on("listening", () => {
+      this.port = this.server!.address().port;
+      this.serviceUrl = `http://localhost:${this.port}`;
+    });
+
+    this.server.on("connection", (socket) => {
+      socket.on("data", (data) => {
+        const message = data.toString();
+        if (message.substr(0, 4) === "POST") {
+          const credentialsMatch = message.match(/(?<=Authorization: Basic ).*\b/);
+          if (credentialsMatch && credentialsMatch.length) {
+            const credentials = new Buffer(credentialsMatch![0], "base64").toString();
+            this.user = credentials.match(/^.*(?=:.*$)/)![0];
+            this.password = credentials.match(/(?<=^.*:).*$/)![0];
+          }
+        }
+      });
+    });
+
+    listen(
+      this.server,
+      this.serverConfig.serviceUrlPath,
+      this.serverConfig.serviceDefinition,
+      this.serverConfig.wsdl);
   }
-}
 
-export function suspendService(timeout: number): void {
-  if (typeof (server) !== "undefined") {
-    process.env.SOAP_TIME_OUT = timeout.toString();
-    suspended = true;
-    server.close();
+  public suspendService(timeout: number): void {
+    if (typeof (this.server) !== "undefined") {
+      process.env.SOAP_TIME_OUT = timeout.toString();
+      this.suspended = true;
+      this.server.close();
+    }
   }
-}
 
-function resumeService(): void {
-  if (suspended) {
-    suspended = false;
-    process.env.SOAP_TIME_OUT = "120000"; // Default http request timeout
-    start(serverConfig);
+  public stop() {
+    if (typeof (this.server) !== "undefined") {
+      this.server.close();
+      this.server = undefined;
+    }
   }
-}
 
-function reset() {
-  serverConfig.resetService();
-  resumeService();
+  public resumeService(): void {
+    if (this.suspended) {
+      this.suspended = false;
+      process.env.SOAP_TIME_OUT = "120000"; // Default http request timeout
+      this.initialise();
+    }
+  }
+
+  private reset() {
+    this.serverConfig.resetService();
+    this.resumeService();
+  }
 }

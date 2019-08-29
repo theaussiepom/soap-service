@@ -2,5 +2,5 @@
 // Do not put code in this file !
 // Export anything that should be public
 
-export { ConnectionConfig, execute, SoapMethod } from "./service";
+export { ConnectionConfig, execute, SoapMethod } from "./service/client";
 export { MockServer, MockServerStatus } from "./service/mock-server";

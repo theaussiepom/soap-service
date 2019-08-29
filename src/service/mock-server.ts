@@ -2,7 +2,7 @@ import { AfterAll, Before } from "cucumber";
 import { createServer } from "http";
 import { Server } from "net";
 import { listen } from "soap";
-import { ConnectionConfig } from "./index";
+import { ConnectionConfig } from "./client";
 
 export interface MockServerStatus {
   config: ConnectionConfig;

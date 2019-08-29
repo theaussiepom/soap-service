@@ -3,4 +3,4 @@
 // Export anything that should be public
 
 export { ConnectionConfig, execute, SoapMethod } from "./service";
-export { MockServer, MockServerStatus } from "./service/automation/support";
+export { MockServer, MockServerStatus } from "./service/mock-server";

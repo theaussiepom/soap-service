@@ -4,3 +4,4 @@
 
 export { ConnectionConfig, execute, SoapMethod } from "./service/client";
 export { MockServer, MockServerStatus } from "./service/mock-server";
+export { Client } from "soap";

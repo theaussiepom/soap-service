@@ -1,5 +1,8 @@
 import { BasicAuthSecurity, Client, createClient } from "soap";
 
+// tslint:disable-next-line:no-empty-interface
+export interface SoapClient extends Client { }
+
 export interface ConnectionConfig {
   credentials?: {
     password: string;

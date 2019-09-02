@@ -122,7 +122,7 @@ export class MockServer {
     if (this.suspended) {
       this.suspended = false;
       process.env.SOAP_TIME_OUT = "120000"; // Default http request timeout
-      this.initialise();
+      this.startServer();
     }
   }
 

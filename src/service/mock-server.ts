@@ -108,26 +108,13 @@ export class MockServer {
       process.env.SOAP_TIME_OUT = timeout.toString();
       this.suspended = true;
       this.server.close();
-    }
-  }
-
-  public stop() {
-    if (typeof (this.server) !== "undefined") {
-      this.server.close();
       this.server = undefined;
-    }
-  }
-
-  public resumeService(): void {
-    if (this.suspended) {
-      this.suspended = false;
-      process.env.SOAP_TIME_OUT = "120000"; // Default http request timeout
-      this.startServer();
     }
   }
 
   private reset() {
     this.serverConfig.resetService();
-    this.resumeService();
+    this.suspended = false;
+    process.env.SOAP_TIME_OUT = "120000"; // Default http request timeout
   }
 }

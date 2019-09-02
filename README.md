@@ -1,9 +1,8 @@
-Core boilerplate template
+Soap Service
 =========================
 
-{Explain the package, its purpose etc}
+Abstracts the connection to and testing of soap services.
 
-This repository is the base reference template for a standard package
 
 ### Folders
 
@@ -56,30 +55,119 @@ This repository is the base reference template for a standard package
 Getting set up
 --------------
 
-{Include here, any extra dependencies and external set-up steps that are
-required.}
-
-The standard process is to install any required package dependencies by running
-the command:
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 npm install
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Configuration
--------------
 
-The primary mechanism for runtime configuration is to use predetermined
-environment variables. These can be set in operating system prior to execution,
-or injected at runtime using the commands
-[cross-env](https://www.npmjs.com/package/cross-env) and/or
-[env-cmd](https://www.npmjs.com/package/env-cmd).
+## Example usage:
 
-### Configurable variables
+### Define the Request and Result objects (the members are case sensitive):
+~~~~~~~~~~~~~~~
+export interface GetWeather {
+  country: string;
+}
 
-| **Name**   | **Default** | **Description**           |
-|------------|-------------|---------------------------|
-| SAMPLE_VAR | sample      | This is a sample variable |
+export interface GetWeatherResult {
+  isSunny: boolean;
+}
+~~~~~~~~~~~~~~~
+
+### Define the Service Client:
+~~~~~~~~~~~~~~~
+export interface ServiceClient extends SoapClient {
+  GetWeather: SoapMethod<GetWeather, GetWeatherResult>;
+}
+~~~~~~~~~~~~~~~
+
+### Define the connection parameters:
+~~~~~~~~~~~~~~~
+const config: ConnectionConfig = {
+  credentials: {
+    password: "password123",
+    user: "weatherman",
+  },
+  serviceUrl: "www.weatherforecast.com/api/weather",
+  wsdlUrl: "www.weatherforecast.com/api/weather?wsdl",
+};
+~~~~~~~~~~~~~~~
+
+### Call the service operation
+
+Connections are transient and live only for the life of the call to the Soap Service.
+
+~~~~~~~~~~~~~~~
+const result = await execute<ServiceClient, GetWeather, GetWeatherResult>(
+    config, (c: ServiceClient) => {
+      return c.GetWeather;
+    }, {
+      country: "Australia",
+    });
+
+console.log(`Australia is sunny: ${result.isSunny}`);
+~~~~~~~~~~~~~~~
+
+### Test using Mock Service
+
+~~~~~~~~~~~~~~~
+// Calling server.initialise before all tests runs sets up the test Mock Server:
+//   - The server will be refreshed before each test, where the supplied resetService function is called
+//   - The server will be stopped upon completion of all tests
+
+// Create stub to represent fake call (see fakeGetWeather definition below)
+export const getWeather: SinonStub = stub();
+
+const server: MockServer = new MockServer({
+  resetService: reset,
+  serviceDefinition: {
+    Weather: {
+      WeatherSoap: {
+        GetWeather: getWeather,
+      },
+    },
+  },
+  serviceUrlPath: "/api/weather", // URL path to the service
+  wsdl: readFileSync(join(__dirname, "service.wsdl"), "utf8"), // Supply a copy of the wsdl
+  wsdlUrlPath: "/api/weather", // URL path to the WSDL (this can be different to the serviceUrlPath)
+});
+
+BeforeAll(() => server.initialise());
+
+export function reset() {
+  getWeather.reset();
+  getWeather.callsFake(fakeGetWeather);
+}
+
+function fakeGetWeather(): { GetWeatherResult: boolean } {
+  return { GetWeatherResult: true };
+}
+~~~~~~~~~~~~~~~
+
+### Getting current status of Mock Service
+~~~~~~~~~~~~~~~
+// Call getStatus on MockServer object
+const status: MockServerStatus = server.getStatus();
+
+/*
+MockServerStatus {
+  config: {
+    credentials: {
+    password: string;
+    user: string;
+  },
+  serviceUrl: string;
+  wsdlUrl: string;
+  };
+  isAvailable: boolean;
+}
+*/
+~~~~~~~~~~~~~~~
+
+### Suspending the server during a test
+~~~~~~~~~~~~~~~
+// Call suspendService on the MockServer object, specifying the temporary timeout for the client (milliseconds)
+server.suspendService(100);
+~~~~~~~~~~~~~~~
 
 Further documentation
 ---------------------

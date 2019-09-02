@@ -121,6 +121,6 @@ export class MockServer {
     this.suspended = false;
     this.user = undefined;
     this.password = undefined;
-    process.env.SOAP_TIME_OUT = undefined;
+    delete process.env.SOAP_TIME_OUT;
   }
 }

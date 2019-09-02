@@ -8,6 +8,7 @@ export interface ConnectionConfig {
     password: string;
     user: string;
   };
+  options?: any;
   serviceUrl: string;
   wsdlUrl: string;
 }
@@ -28,7 +29,7 @@ export async function execute<TService extends Client, TInput, TResult>(
         }
       };
 
-      const options: any = {};
+      const options: any = config.options || {};
       if (process.env.SOAP_TIME_OUT) {
         options.timeout = parseInt(process.env.SOAP_TIME_OUT, 10);
       }

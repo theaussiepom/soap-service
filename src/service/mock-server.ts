@@ -21,8 +21,8 @@ export class MockServer {
   private server: Server | undefined;
   private serviceUrl: string = "";
   private wsdlUrl: string = "";
-  private password: string = "";
-  private user: string = "";
+  private password: string | undefined;
+  private user: string | undefined;
   private port: number = 0;
   private serverConfig: ServerConfig;
   private suspended = true;
@@ -34,7 +34,7 @@ export class MockServer {
   public getStatus(): MockServerStatus {
     return {
       config: {
-        credentials: this.password ? {
+        credentials: this.user && this.password ? {
           password: this.password,
           user: this.user,
         } : undefined,
@@ -85,13 +85,11 @@ export class MockServer {
     this.server.on("connection", (socket) => {
       socket.on("data", (data) => {
         const message = data.toString();
-        if (message.substr(0, 4) === "POST") {
-          const credentialsMatch = message.match(/(?<=Authorization: Basic ).*\b/);
-          if (credentialsMatch && credentialsMatch.length) {
-            const credentials = new Buffer(credentialsMatch![0], "base64").toString();
-            this.user = credentials.match(/^.*(?=:.*$)/)![0];
-            this.password = credentials.match(/(?<=^.*:).*$/)![0];
-          }
+        const credentialsMatch = message.match(/(?<=Authorization: Basic ).*\b/);
+        if (credentialsMatch && credentialsMatch.length) {
+          const credentials = new Buffer(credentialsMatch![0], "base64").toString();
+          this.user = credentials.match(/^.*(?=:.*$)/)![0];
+          this.password = credentials.match(/(?<=^.*:).*$/)![0];
         }
       });
     });
@@ -121,6 +119,8 @@ export class MockServer {
   private reset() {
     this.serverConfig.resetService();
     this.suspended = false;
-    process.env.SOAP_TIME_OUT = "120000"; // Default http request timeout
+    this.user = undefined;
+    this.password = undefined;
+    process.env.SOAP_TIME_OUT = undefined;
   }
 }

@@ -107,6 +107,12 @@ export class MockServer {
     if (typeof (this.server) !== "undefined") {
       process.env.SOAP_TIME_OUT = timeout.toString();
       this.suspended = true;
+      this.stop();
+    }
+  }
+
+  private stop() {
+    if (typeof (this.server) !== "undefined") {
       this.server.close();
       this.server = undefined;
     }
